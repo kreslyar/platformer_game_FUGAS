@@ -9,6 +9,7 @@ public class Teleport : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+           // PlayerMovement2D playerMovement = collision.GetComponent<PlayerMovement2D>();
             SceneManager.LoadScene("Level_2");
         }
     }

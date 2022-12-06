@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     float movingY;
-    float speed = 4f;
+    float speed = 5f;
 
     bool movingUp = true;
 

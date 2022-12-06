@@ -36,6 +36,12 @@ public class MenuAndPause : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void ContinueGame()
+    {
+        var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
     public void Exit()
     {
         Application.Quit();

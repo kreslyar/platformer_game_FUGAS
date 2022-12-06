@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,13 +17,14 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private bool isJump;
     private bool canJump;
+    public static Vector2 checkPointPos;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-
+        checkPointPos=transform.position;
     }
 
     void FixedUpdate()
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-    
         var trigerredCollider = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         isJump = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space);
@@ -45,15 +46,17 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        
+        anim.SetBool("isGround", canJump);
     }
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+
+        if (isJump)
         {
             rb.AddForce(Vector2.up*jump);
         }
+        
     }
 
     void Flip(float move)
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("MovedPlatform"))
         {
+            speed = 10;
             this.transform.parent = collision.transform;
         }
     }
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("MovedPlatform"))
         {
+            speed = 5;
             this.transform.parent = null;
         }
     }

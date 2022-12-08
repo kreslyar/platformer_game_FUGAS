@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TextMeshProUGUI textPotion;
     [SerializeField] private Lives livesUI;
+    [SerializeField] private Transform swordAttack;
+    [SerializeField] private LayerMask enemyLayer;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         var trigerredCollider = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
-        isJump = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space);
+        isJump = Input.GetKeyDown(KeyCode.UpArrow);
         canJump = trigerredCollider != null;
 
         if (isJump && canJump)
@@ -56,16 +58,31 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         anim.SetBool("isGround", canJump);
+
+        Attack();
     }
 
     void Jump()
     {
-
         if (isJump)
         {
             rb.AddForce(Vector2.up*jump);
         }
-        
+    }
+
+    void Attack()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetTrigger("attack");
+
+            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 1f, enemyLayer);
+
+            if(trigerredCollider != null)
+            {
+                Destroy(trigerredCollider.gameObject, 0.3f);
+            }
+        }
     }
 
     void Flip(float move)
@@ -73,12 +90,18 @@ public class PlayerController : MonoBehaviour
         if (move<0 && isRight)
         {
             isRight = false;
-            sr.flipX = true;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+            //sr.flipX = true;
         }
         else if (move>0&&!isRight)
         {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
             isRight = true;
-            sr.flipX = false;
+            //sr.flipX = false;
         }
     }
 

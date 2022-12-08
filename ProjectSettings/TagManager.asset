@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Potion
   - CheckPoint
+  - Floor
   layers:
   - Default
   - TransparentFX

@@ -32,14 +32,20 @@ public class MenuAndPause : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }
 
     public void ContinueGame()
     {
+        Time.timeScale = 1f;
+        canvasMenu.SetActive(false);
+    }
+    public void StartLevel()
+    {
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+        Time.timeScale = 1f;
     }
 
     public void Exit()

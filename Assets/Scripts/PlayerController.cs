@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private TextMeshProUGUI textPotion;
+    [SerializeField] private Lives livesUI;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -18,6 +21,12 @@ public class PlayerController : MonoBehaviour
     private bool isJump;
     private bool canJump;
     public static Vector2 checkPointPos;
+    private int potionCount = 0;
+    private int lives = 3;
+    public int PotionCount
+    {
+        get => potionCount;
+    }
 
     private void Awake()
     {
@@ -88,6 +97,31 @@ public class PlayerController : MonoBehaviour
         {
             speed = 5;
             this.transform.parent = null;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Potion")
+        {
+            potionCount++;
+            textPotion.text = potionCount.ToString();
+            GameObject potionObject = collision.gameObject;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.tag == "Floor")
+        {
+            Damage();
+        }
+    }
+
+    private void Damage()
+    {
+        lives--;
+        livesUI.RemoveLives();
+        if (lives == 0)
+        {
+            Time.timeScale = 0;
+            livesUI.GameOver();
         }
     }
 

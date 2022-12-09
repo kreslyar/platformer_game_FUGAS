@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("attack");
 
-            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 1f, enemyLayer);
+            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 0.7f, enemyLayer);
 
             if(trigerredCollider != null)
             {

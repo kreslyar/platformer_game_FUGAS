@@ -76,14 +76,19 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("attack");
 
-            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 0.7f, enemyLayer);
+            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 1.3f, enemyLayer);
 
             if(trigerredCollider != null)
             {
-                Destroy(trigerredCollider.gameObject, 0.3f);
+                Destroy(trigerredCollider.gameObject, 0.2f);
             }
         }
     }
+
+    /*private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(swordAttack.position, 1.3f);
+    }*/
 
     void Flip(float move)
     {
@@ -109,7 +114,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("MovedPlatform"))
         {
-            speed = 10;
+            //speed = 10;
             this.transform.parent = collision.transform;
         }
     }
@@ -118,7 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("MovedPlatform"))
         {
-            speed = 5;
+            //speed = 5;
             this.transform.parent = null;
         }
     }
@@ -131,7 +136,7 @@ public class PlayerController : MonoBehaviour
             GameObject potionObject = collision.gameObject;
             Destroy(collision.gameObject);
         }
-        else if (collision.tag == "Floor")
+        else if (collision.tag == "Floor" || collision.tag == "Enemy")
         {
             Damage();
         }
@@ -143,8 +148,8 @@ public class PlayerController : MonoBehaviour
         livesUI.RemoveLives();
         if (lives == 0)
         {
-            Time.timeScale = 0;
-            livesUI.GameOver();
+          Time.timeScale = 0;
+          livesUI.GameOver();
         }
     }
 

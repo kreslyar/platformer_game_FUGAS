@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
         checkPointPos=transform.position;
     }
 
+    private void Start()
+    {
+        textPotion.text = UserDataController.Instance.Potion.ToString();
+    }
+
     void FixedUpdate()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("attack");
 
-            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 1.3f, enemyLayer);
+            var trigerredCollider = Physics2D.OverlapCircle(swordAttack.position, 1.1f, enemyLayer);
 
             if(trigerredCollider != null)
             {
@@ -85,10 +90,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(swordAttack.position, 1.3f);
-    }*/
+        Gizmos.DrawWireSphere(swordAttack.position, 1.1f);
+    }
 
     void Flip(float move)
     {
@@ -130,9 +135,9 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Potion")
-        {
-            potionCount++;
-            textPotion.text = potionCount.ToString();
+        {           
+            UserDataController.Instance.AddPotion(1);
+            textPotion.text = UserDataController.Instance.Potion.ToString();
             GameObject potionObject = collision.gameObject;
             Destroy(collision.gameObject);
         }
@@ -144,9 +149,9 @@ public class PlayerController : MonoBehaviour
 
     private void Damage()
     {
-        lives--;
-        livesUI.RemoveLives();
-        if (lives == 0)
+        UserDataController.Instance.RemoveLives(1);
+        livesUI.UpdateLives(UserDataController.Instance.Lives);
+        if (UserDataController.Instance.Lives == 0)
         {
           Time.timeScale = 0;
           livesUI.GameOver();

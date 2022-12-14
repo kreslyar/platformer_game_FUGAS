@@ -5,23 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Teleport : MonoBehaviour
 {
-    [SerializeField] private GameObject panelWork;
+    //[SerializeField] private GameObject panelWork;
     public GameObject canvasMenu;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            Work();
-            // PlayerMovement2D playerMovement = collision.GetComponent<PlayerMovement2D>();
-            //SceneManager.LoadScene("Level_2");
+            //Work();
+            PlayerController playerController = collision.GetComponent<PlayerController>();
+            SceneManager.LoadScene(2);
+        
 
         }
 
-        
     }
 
-    public void Work()
+   /* public void Work()
     {
         panelWork.SetActive(true);
     }
@@ -29,5 +29,5 @@ public class Teleport : MonoBehaviour
     public void LoadMenuPanel()
     {
         canvasMenu.SetActive(true);
-    }
+    }*/
 }

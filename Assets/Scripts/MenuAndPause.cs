@@ -34,6 +34,7 @@ public class MenuAndPause : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         Time.timeScale = 1f;
+        UserDataController.Instance.ResetData();
     }
 
     public void ContinueGame()
@@ -46,6 +47,7 @@ public class MenuAndPause : MonoBehaviour
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         Time.timeScale = 1f;
+        UserDataController.Instance.ResetData();
     }
 
     public void Exit()

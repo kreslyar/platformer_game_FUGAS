@@ -5430,7 +5430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7e32bf26cbf4ca6981c1b9dd60ab89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelWork: {fileID: 2123971460}
   canvasMenu: {fileID: 8917747983725311926}
 --- !u!61 &858593725
 BoxCollider2D:
@@ -9420,19 +9419,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5172542350661725169, guid: b784f850afe1fc145a0b840ff604cbeb, type: 3}
   m_PrefabInstance: {fileID: 7064688941483097602}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7064688941483097609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064688941483097603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0391cdc336c384bfcb0a5df54a77cb95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textPotion: {fileID: 3890178442953352833}
 --- !u!95 &7064688941483097612
 Animator:
   serializedVersion: 4

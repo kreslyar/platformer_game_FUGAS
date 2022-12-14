@@ -9,6 +9,7 @@ public class FloorLevel : MonoBehaviour
         if (collision.tag =="Player")
         {
             collision.transform.position = PlayerController.checkPointPos;
+
         }
     }
 

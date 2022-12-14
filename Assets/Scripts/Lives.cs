@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Lives : MonoBehaviour
 {
@@ -8,20 +9,11 @@ public class Lives : MonoBehaviour
     [SerializeField] private GameObject [] objLives;
     [SerializeField] private GameObject panelGameOver;
     public GameObject canvasMenu;
-    private int lives = 3;
-
-    public void AddLives()
+    //private int lives = 3;
+    public void Update()
     {
-        lives++;
-        UpdateLives();
+        UpdateLives(UserDataController.Instance.Lives);
     }
-
-    public void RemoveLives()
-    {
-        lives--;
-        UpdateLives();
-    }
-
     public void GameOver()
     {
         panelGameOver.SetActive(true);
@@ -32,7 +24,7 @@ public class Lives : MonoBehaviour
         canvasMenu.SetActive(true);
     }
 
-    void UpdateLives()
+    public void UpdateLives(int lives)
     {
         for (int i = 0; i < 3; i++)
         {
